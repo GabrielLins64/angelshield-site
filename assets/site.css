@@ -20,8 +20,25 @@ h3 { font-size: 19px; letter-spacing: -.02em; font-weight: 600; }
 .brand-accent { color: var(--accent); }
 .brand small { display: block; margin-top: 5px; color: #98a6bf; font-size: 8px; font-weight: 500; letter-spacing: 2.1px; }
 .site-nav, .site-footer nav { display: flex; align-items: center; gap: 28px; }
+.site-nav { flex-wrap: wrap; }
 .site-nav a, .site-footer nav a { color: #b4bfd4; font-size: 13px; text-decoration: none; }
 .site-nav a:hover, .site-footer nav a:hover { color: #fff; }
+.site-nav .nav-install { --install-rainbow: linear-gradient(90deg, #ff9dbd, #ffc98f, #f8ed9b, #9debc2, #9edaff, #c4b1ff, #ff9dbd); position: relative; isolation: isolate; display: inline-flex; align-items: center; gap: 5px; color: transparent; white-space: nowrap; background-image: var(--install-rainbow); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; animation: install-spectrum 6s linear infinite, install-glow 6s linear infinite; transition: color .25s ease; }
+.site-nav .nav-install::after { content: ""; position: absolute; inset: -5px -8px; z-index: -1; border-radius: 50%; pointer-events: none; background-image: var(--install-rainbow); background-size: 200% 100%; filter: blur(10px) saturate(1.8); opacity: 0; transform: scale(.85); animation: install-spectrum 3s linear infinite, install-aura 3s ease-in-out infinite; transition: transform .3s ease, opacity .3s ease; }
+.site-nav .nav-install span { display: inline-block; color: #c5d4ff; transition: color .25s ease, transform .25s ease; }
+.site-nav .nav-install:is(:hover, :focus-visible) { color: #fff; text-shadow: 0 1px 3px #0c1019; }
+.site-nav .nav-install:is(:hover, :focus-visible)::after { opacity: .5; transform: scale(1.08); }
+.site-nav .nav-install:is(:hover, :focus-visible) span { color: inherit; transform: translateX(2px); }
+@keyframes install-spectrum { to { background-position: 200% center; } }
+@keyframes install-aura {
+  0%, 100% { filter: blur(8px) saturate(1.8); }
+  50% { filter: blur(12px) saturate(1.8); }
+}
+@keyframes install-glow {
+  0%, 100% { filter: drop-shadow(0 0 3px #ff82b580); }
+  33% { filter: drop-shadow(0 0 3px #8ff8b980); }
+  66% { filter: drop-shadow(0 0 3px #9faaff80); }
+}
 .hero { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 46px; padding-block: 92px 86px; }
 .eyebrow { display: flex; align-items: center; gap: 9px; color: var(--accent); font-size: 10px; letter-spacing: 2px; font-weight: 650; line-height: 1.6; margin-bottom: 21px; }
 .status-dot { display: inline-block; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: #7ec6a7; }
@@ -115,6 +132,15 @@ h3 { font-size: 19px; letter-spacing: -.02em; font-weight: 600; }
   .document h1 { font-size: 36px; }
   .document p, .document li { font-size: 14px; }
   .privacy-page .site-header { gap: 18px; }
-  .privacy-page .site-nav { width: auto; }
+  .privacy-page .site-nav { width: 100%; }
 }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .button { transition: none; }
+  .site-nav .nav-install, .site-nav .nav-install::after, .site-nav .nav-install span { animation: none; transition: none; }
+  .site-nav .nav-install:is(:hover, :focus-visible) span { transform: none; }
+}
+@media (forced-colors: active) {
+  .site-nav .nav-install, .site-nav .nav-install:is(:hover, :focus-visible), .site-nav .nav-install span { color: LinkText; background: none; filter: none; animation: none; }
+  .site-nav .nav-install::after { display: none; }
+}
