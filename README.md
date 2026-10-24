@@ -4,7 +4,7 @@ Página pública do AngelShield, com apresentação dos recursos, informações 
 
 - Página inicial: https://gabriellins64.github.io/angelshield-site/
 - Política de privacidade: https://gabriellins64.github.io/angelshield-site/privacidade/
-- Suporte: https://github.com/GabrielLins64/angelshield-site/issues
+- Suporte: https://github.com/GabrielLins64/AngelShield/issues
 
 ## Publicação
 
